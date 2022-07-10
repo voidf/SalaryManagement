@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
+using System.IO;
 
 namespace DataModel
 {
@@ -72,6 +73,19 @@ namespace DataModel
             handle = _handle;
             if (_password == null) _password = "";
             password = encrypt(_password);
+        }
+
+        public static List<string> GetUserDirList()
+        {
+            var li = new List<string>();
+            foreach(var i in Directory.GetDirectories(Utils.Constant.user_path))
+            {
+                if(File.Exists($"{i}/{extension}"))
+                {
+                    li.Add(i);
+                }
+            }
+            return li;
         }
 
     }

@@ -9,7 +9,7 @@
       Title="UserPage">
 
     <Grid>
-        
+
         <ListView 
             ItemsSource="{Binding li, Mode=TwoWay}"
             Margin="377,25.5,23.5,115.5">
@@ -17,7 +17,7 @@
                 <GridView>
                     <GridViewColumn Width="120" Header="机床型号"
                         DisplayMemberBinding="{Binding type, Mode=TwoWay}"  />
-                    <GridViewColumn Width="50" Header="班次"  
+                    <GridViewColumn Width="50" Header="班次"   
                         DisplayMemberBinding="{Binding period, Mode=TwoWay}" />
                     <GridViewColumn Width="140" Header="工序名称"
                         DisplayMemberBinding="{Binding process_name, Mode=TwoWay}" />
@@ -27,12 +27,14 @@
                         DisplayMemberBinding="{Binding count_end, Mode=TwoWay}" />
                     <GridViewColumn Width="40" Header="数量"
                         DisplayMemberBinding="{Binding count, Mode=TwoWay}" />
-                    <GridViewColumn Width="140" Header="备注"
+                    <GridViewColumn Width="130" Header="备注"
                         DisplayMemberBinding="{Binding ps, Mode=TwoWay}" />
                     <GridViewColumn Width="70" Header="工资结算"
                         DisplayMemberBinding="{Binding salary, Mode=TwoWay}" />
-                    <GridViewColumn Width="180" Header="杂班内容"
+                    <GridViewColumn Width="130" Header="杂班内容"
                         DisplayMemberBinding="{Binding content, Mode=TwoWay}" />
+                    <GridViewColumn Width="60" Header="审核状态"
+                        DisplayMemberBinding="{Binding approved, Mode=TwoWay}" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -49,7 +51,7 @@
         <TextBox HorizontalAlignment="Left" Height="23" Margin="161.5,59.5,0,0" TextWrapping="Wrap" Text="{Binding type, Mode=TwoWay}" VerticalAlignment="Top" Width="176"/>
 
         <TextBox HorizontalAlignment="Left" Height="23" Margin="161.5,139.5,0,0" TextWrapping="Wrap" Text="{Binding process_name, Mode=TwoWay}" VerticalAlignment="Top" Width="176"/>
-        
+
         <TextBox PreviewTextInput="NumberOnly" HorizontalAlignment="Left" Height="23" Margin="161.5,179.5,0,0" TextWrapping="Wrap" Text="{Binding count_begin, Mode=TwoWay}" VerticalAlignment="Top" Width="64"/>
         <TextBox PreviewTextInput="NumberOnly" HorizontalAlignment="Left" Height="23" Margin="273.5,179.5,0,0" TextWrapping="Wrap" Text="{Binding count_end, Mode=TwoWay}" VerticalAlignment="Top" Width="64"/>
 
@@ -62,6 +64,12 @@
         <Label Content="~" HorizontalAlignment="Left" Margin="241.166,180.313,0,0" VerticalAlignment="Top"/>
         <Button Click="Submit" Content="提交" HorizontalAlignment="Left" Margin="262.5,353,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Click="RefreshBtn" Content="刷新" HorizontalAlignment="Left" Margin="1055.5,638.5,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="密码修改区" HorizontalAlignment="Left" Margin="59.5,477.666,0,0" VerticalAlignment="Top"/>
+        <Label Content="新密码" HorizontalAlignment="Left" Margin="59.5,533.999,0,0" VerticalAlignment="Top"/>
+        <Label Content="确认密码" HorizontalAlignment="Left" Margin="59.5,579.665,0,0" VerticalAlignment="Top"/>
+        <PasswordBox PasswordChanged="PasswordChanged" HorizontalAlignment="Left" Margin="161.5,539.499,0,0" VerticalAlignment="Top" Width="176"/>
+        <PasswordBox PasswordChanged="ConfirmChanged" HorizontalAlignment="Left" Margin="162,584.832,0,0" VerticalAlignment="Top" Width="176"/>
+        <Button Click="ChangePassword" Content="确认修改" HorizontalAlignment="Left" Margin="263,638.5,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Page>

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Utils;
 
 namespace SalaryManagement
 {
@@ -47,6 +48,9 @@ namespace SalaryManagement
             public int salary { get; set; }         // 工资结算（按分钱算，元需要/100）
             public string content { get; set; }      // 杂班内容
 
+
+            public string password { get; set; }
+            public string confirm { get; set; }
         }
 
         ViewModel v = new ViewModel() { 
@@ -73,10 +77,7 @@ namespace SalaryManagement
                 v.li.Add(i);
             
         }
-        private void RefreshBtn(object sender, RoutedEventArgs e)
-        {
-            Refresh();
-        }
+        private void RefreshBtn(object sender, RoutedEventArgs e){Refresh();}
 
         private static readonly Regex _regex = new Regex("[^0-9.-]+"); // 限制用户只能输入0-9
         private void NumberOnly(object sender, TextCompositionEventArgs e)
@@ -94,10 +95,7 @@ namespace SalaryManagement
             DataContext = v;
         }
 
-        private void Back(object sender, RoutedEventArgs e)
-        {
-            mw.navigate(new LoginPage(mw));
-        }
+        private void Back(object sender, RoutedEventArgs e){mw.navigate(new LoginPage(mw));}
 
         private void Submit(object sender, RoutedEventArgs e)
         {
@@ -143,6 +141,29 @@ namespace SalaryManagement
            );
             MessageBox.Show("填报成功");
             Refresh();
+        }
+
+        private void PasswordChanged(object sender, RoutedEventArgs e){v.password = ((PasswordBox)sender).Password;}
+        private void ConfirmChanged(object sender, RoutedEventArgs e){v.confirm = ((PasswordBox)sender).Password;}
+
+        private void ChangePassword(object sender, RoutedEventArgs e)
+        {
+            if(v.password != v.confirm)
+            {
+                MessageBox.Show("确认密码和密码不一致呃...", "密码校验未通过");
+                return;
+            }
+            if (!DataModel.Auth.CheckPassword(v.password)) return;
+
+            var fp = Constant.UserDirectory(handle);
+            Constant.EnsurePath(fp);
+
+            var fn = Constant.UserPath(handle, DataModel.Auth.extension);
+            var a = new DataModel.Auth(handle, v.password);
+
+            Protocol.dump<DataModel.Auth>(a, fn);
+
+            MessageBox.Show("密码修改成功！");
         }
     }
 }

@@ -24,6 +24,7 @@ namespace DataModel
         public string ps { get; set; }            // 备注
         public int salary { get; set; }           // 工资结算（按分钱算，元需要/100）
         public string content { get; set; }       // 杂班内容
+        public bool approved { get; set; }        // 审核通过
 
         public int CompareTo(Product other)
         {

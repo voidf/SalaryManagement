@@ -44,10 +44,7 @@ namespace SalaryManagement
             this.DataContext = v;
         }
 
-        private void PasswordChange(object sender, RoutedEventArgs e)
-        {
-            v.Password = ((PasswordBox)sender).Password;
-        }
+        private void PasswordChange(object sender, RoutedEventArgs e){v.Password = ((PasswordBox)sender).Password;}
 
         private void ClickLogin(object sender, RoutedEventArgs e)
         {
@@ -58,7 +55,8 @@ namespace SalaryManagement
             if (!DataModel.Auth.CheckHandle(v.Handle)) return;
             if(v.Role[0]) // 管理
             {
-                MessageBox.Show("在做了~");
+                //MessageBox.Show("在做了~");
+                mw.navigate(new AdminPage(mw));
                 return;
             }
             else // 员工
@@ -104,7 +102,7 @@ namespace SalaryManagement
                 Protocol.dump<DataModel.Auth>(a, fn);
 
                 MessageBox.Show("注册成功！");
-
+                mw.navigate(new UserPage(mw, v.Handle));
             }
         }
     }
