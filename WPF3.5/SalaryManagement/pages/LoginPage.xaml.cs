@@ -25,10 +25,12 @@ namespace SalaryManagement
     {
         class ViewModel
         {
-            public bool[] Role = new bool[] { 
+            private bool[] _role  = new bool[] { 
                 false,  // 管理
                 true    // 员工
             }; 
+            public bool[] Role { get { return _role; } }
+            public int SelectedRole { get { return Array.IndexOf(_role, true); }}
             public string Handle { get; set; }
             public string Password { get; set; }
         }
@@ -49,6 +51,10 @@ namespace SalaryManagement
 
         private void ClickLogin(object sender, RoutedEventArgs e)
         {
+            //Console.WriteLine(v.Role[0]);
+            //Console.WriteLine(v.Role[1]); 
+            //Console.WriteLine(v.SelectedRole);
+
             if (!DataModel.Auth.CheckHandle(v.Handle)) return;
             if(v.Role[0]) // 管理
             {
@@ -60,7 +66,7 @@ namespace SalaryManagement
                 Constant.EnsurePath(Constant.user_path);
 
                 var fp = Constant.UserDirectory(v.Handle);
-                var fn = Constant.UserPath(v.Handle, Constant.auth_extension);
+                var fn = Constant.UserPath(v.Handle, DataModel.Auth.extension);
                 if(!Directory.Exists(fp) || !File.Exists(fn))
                 {
                     MessageBox.Show("用户名或密码错误");
@@ -92,7 +98,7 @@ namespace SalaryManagement
                 var fp = Constant.UserDirectory(v.Handle);
                 Constant.EnsurePath(fp);
 
-                var fn = Constant.UserPath(v.Handle, Constant.auth_extension);
+                var fn = Constant.UserPath(v.Handle, DataModel.Auth.extension);
                 var a = new DataModel.Auth(v.Handle, v.Password);
 
                 Protocol.dump<DataModel.Auth>(a, fn);

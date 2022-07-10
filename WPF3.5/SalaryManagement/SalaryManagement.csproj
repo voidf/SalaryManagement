@@ -84,6 +84,7 @@
     <Compile Include="pages\UserPage.xaml.cs">
       <DependentUpon>UserPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="utils\RadioButtonExtended.cs" />
     <Compile Include="utils\Serializer.cs" />
     <Compile Include="utils\Constant.cs" />
     <Compile Include="model\Auth.cs" />

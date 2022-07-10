@@ -3,16 +3,65 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SalaryManagement"
+      xmlns:local="clr-namespace:SalaryManagement" xmlns:controls="clr-namespace:Controls"
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1080"
+      d:DesignHeight="720" d:DesignWidth="1280"
       Title="UserPage">
 
     <Grid>
-            <ListView Margin="324.5,10,10,131">
+        
+        <ListView 
+            ItemsSource="{Binding li, Mode=TwoWay}"
+            Margin="377,25.5,23.5,115.5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="120" Header="机床型号"
+                        DisplayMemberBinding="{Binding type, Mode=TwoWay}"  />
+                    <GridViewColumn Width="50" Header="班次"  
+                        DisplayMemberBinding="{Binding period, Mode=TwoWay}" />
+                    <GridViewColumn Width="140" Header="工序名称"
+                        DisplayMemberBinding="{Binding process_name, Mode=TwoWay}" />
+                    <GridViewColumn Width="70" Header="序号起始"
+                        DisplayMemberBinding="{Binding count_begin, Mode=TwoWay}" />
+                    <GridViewColumn Width="70" Header="序号结束"
+                        DisplayMemberBinding="{Binding count_end, Mode=TwoWay}" />
+                    <GridViewColumn Width="40" Header="数量"
+                        DisplayMemberBinding="{Binding count, Mode=TwoWay}" />
+                    <GridViewColumn Width="140" Header="备注"
+                        DisplayMemberBinding="{Binding ps, Mode=TwoWay}" />
+                    <GridViewColumn Width="70" Header="工资结算"
+                        DisplayMemberBinding="{Binding salary, Mode=TwoWay}" />
+                    <GridViewColumn Width="180" Header="杂班内容"
+                        DisplayMemberBinding="{Binding content, Mode=TwoWay}" />
+                </GridView>
+            </ListView.View>
         </ListView>
 
-        <Button Content="返回" HorizontalAlignment="Left" Margin="965,644.5,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Click="Back" Content="返回" HorizontalAlignment="Left" Margin="1181.5,638.5,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBlock HorizontalAlignment="Left" Margin="59.5,62.5,0,0" TextWrapping="Wrap" Text="机床型号" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="59.5,102.5,0,0" TextWrapping="Wrap" Text="班次" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="59.5,142.5,0,0" TextWrapping="Wrap" Text="工序名称" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="59.5,182.5,0,0" TextWrapping="Wrap" Text="数量序号" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="59.5,222.5,0,0" TextWrapping="Wrap" Text="备注" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="59.5,262.5,0,0" TextWrapping="Wrap" Text="工资结算" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="59.5,302.5,0,0" TextWrapping="Wrap" Text="杂班内容" VerticalAlignment="Top"/>
+
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="161.5,59.5,0,0" TextWrapping="Wrap" Text="{Binding type, Mode=TwoWay}" VerticalAlignment="Top" Width="176"/>
+
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="161.5,139.5,0,0" TextWrapping="Wrap" Text="{Binding process_name, Mode=TwoWay}" VerticalAlignment="Top" Width="176"/>
+        
+        <TextBox PreviewTextInput="NumberOnly" HorizontalAlignment="Left" Height="23" Margin="161.5,179.5,0,0" TextWrapping="Wrap" Text="{Binding count_begin, Mode=TwoWay}" VerticalAlignment="Top" Width="64"/>
+        <TextBox PreviewTextInput="NumberOnly" HorizontalAlignment="Left" Height="23" Margin="273.5,179.5,0,0" TextWrapping="Wrap" Text="{Binding count_end, Mode=TwoWay}" VerticalAlignment="Top" Width="64"/>
+
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="161.5,219.5,0,0" TextWrapping="Wrap" Text="{Binding ps, Mode=TwoWay}" VerticalAlignment="Top" Width="176"/>
+        <TextBox PreviewTextInput="NumberOnly" HorizontalAlignment="Left" Height="23" Margin="161.5,259.5,0,0" TextWrapping="Wrap" Text="{Binding salary, Mode=TwoWay}" VerticalAlignment="Top" Width="176"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="161.5,299.5,0,0" TextWrapping="Wrap" Text="{Binding content, Mode=TwoWay}" VerticalAlignment="Top" Width="176"/>
+        <controls:RadioButtonExtended GroupName="PeriodSelection" IsCheckedReal="{Binding periodArr[0], Mode=TwoWay}" Content="早" HorizontalAlignment="Left" Margin="162,102.5,0,0" VerticalAlignment="Top"/>
+        <controls:RadioButtonExtended GroupName="PeriodSelection" IsCheckedReal="{Binding periodArr[1], Mode=TwoWay}" Content="晚" HorizontalAlignment="Left" Margin="237,102.5,0,0" VerticalAlignment="Top"/>
+        <controls:RadioButtonExtended GroupName="PeriodSelection" IsCheckedReal="{Binding periodArr[2], Mode=TwoWay}" Content="夜" HorizontalAlignment="Left" Margin="306.5,102.5,0,0" VerticalAlignment="Top"/>
+        <Label Content="~" HorizontalAlignment="Left" Margin="241.166,180.313,0,0" VerticalAlignment="Top"/>
+        <Button Click="Submit" Content="提交" HorizontalAlignment="Left" Margin="262.5,353,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Click="RefreshBtn" Content="刷新" HorizontalAlignment="Left" Margin="1055.5,638.5,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Page>

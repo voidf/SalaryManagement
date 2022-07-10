@@ -11,7 +11,6 @@ namespace Utils
     {
         public const string salt = "Sorawomiro"; // 狗管理密码盐值
         public const string admin_auth_file = "admin.bin"; // 狗管理密码验证文件路径
-        public const string auth_extension = ".auth";
         public const string user_path = "userdata";
 
         public static string UserDirectory(string userhandle) { return $"{user_path}/{userhandle}"; }

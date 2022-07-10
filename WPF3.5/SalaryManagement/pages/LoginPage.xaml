@@ -3,14 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SalaryManagement"
+      xmlns:local="clr-namespace:SalaryManagement" xmlns:controls="clr-namespace:Controls"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="LoginPage" WindowTitle="登录...">
 
     <Grid>
-        <RadioButton GroupName="Role" IsChecked="{Binding Role[0], Mode=TwoWay}" Content="管理员" HorizontalAlignment="Left" Margin="643.833,269,0,0" VerticalAlignment="Top"/>
-        <RadioButton GroupName="Role" IsChecked="{Binding Role[1], Mode=TwoWay}" Content="员工" HorizontalAlignment="Left" Margin="735.332,269,0,0" VerticalAlignment="Top"/>
+        <controls:RadioButtonExtended GroupName="Role" IsCheckedReal="{Binding Path=Role[0], Mode=TwoWay}" Content="管理员" HorizontalAlignment="Left" Margin="643.833,269,0,0" VerticalAlignment="Top"/>
+        <controls:RadioButtonExtended GroupName="Role" IsCheckedReal="{Binding Path=Role[1], Mode=TwoWay}" Content="员工" HorizontalAlignment="Left" Margin="735.332,269,0,0" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="515.832,269,0,0" TextWrapping="Wrap" Text="您的角色：" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="439.5,171,0,0" TextWrapping="Wrap" Text="很好，我们就差登录了……" VerticalAlignment="Top" FontSize="36"/>
         <TextBox Text="{Binding Handle, Mode=TwoWay}"  HorizontalAlignment="Left" Height="23" Margin="643.833,360.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
