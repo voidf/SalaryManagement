@@ -56,6 +56,13 @@ namespace SalaryManagement
             if(v.Role[0]) // 管理
             {
                 //MessageBox.Show("在做了~");
+                var current = new DataModel.Auth(v.Handle, v.Password);
+                var saved = Protocol.load<DataModel.Auth>(Constant.admin_auth_file);
+                if (!current.Equals(saved))
+                {
+                    MessageBox.Show($"用户名或密码错误");
+                    return;
+                }
                 mw.navigate(new AdminPage(mw));
                 return;
             }
@@ -74,7 +81,7 @@ namespace SalaryManagement
                 var current = new DataModel.Auth(v.Handle, v.Password);
                 if(!current.Equals(saved))
                 {
-                    MessageBox.Show($"用户名或密码错误\n{saved.password}\n{current.password}");
+                    MessageBox.Show($"用户名或密码错误");
                     return;
                 }
                 mw.navigate(new UserPage(mw, v.Handle));

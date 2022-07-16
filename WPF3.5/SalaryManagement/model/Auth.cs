@@ -19,9 +19,13 @@ namespace DataModel
 
         static string sha256(string source)
         {
+            // Console.WriteLine(source);
+
             byte[] bytes = Encoding.UTF8.GetBytes(source);
             SHA256 sha256 = new SHA256CryptoServiceProvider();
             byte[] retVal = sha256.ComputeHash(bytes);
+
+            // Console.WriteLine(retVal);
 
             StringBuilder sb = new StringBuilder();
 
@@ -84,6 +88,16 @@ namespace DataModel
                 {
                     li.Add(i);
                 }
+            }
+            return li;
+        }
+
+        public static List<string> GetUserDirListWithoutAuth()
+        {
+            var li = new List<string>();
+            foreach (var i in Directory.GetDirectories(Utils.Constant.user_path))
+            {
+                li.Add(i);
             }
             return li;
         }

@@ -119,17 +119,7 @@ namespace Utils
         {
             var li = new List<T>();
             var paths = Directory.GetFiles(dir);
-            //if (numbersorted)
-            //{
-            //    List<string> otherlist = new List<string>();
-            //    List<string> numberlist = new List<string>();
 
-            //    foreach (var i in paths)
-            //    {
-                    
-            //    }
-
-            //}
             foreach (var f in paths)
             {
                 if (f.EndsWith(ext))
@@ -137,6 +127,32 @@ namespace Utils
                     try
                     {
                         li.Add(load<T>(f));
+                        Console.WriteLine($"loaded {typeof(T)} <{f}>");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($"反序列化{typeof(T)}时出错：文件{f}有毒\n<{e}>");
+                    }
+                }
+            }
+            return li;
+        }
+        public static List<T> LoadFromDirectory<T>(string dir, string ext, out List<int> filenames) // ext大概可以用反射解决，但是懒得研究了
+        {
+            filenames = new List<int>();
+            var li = new List<T>();
+            var paths = Directory.GetFiles(dir);
+
+            foreach (var f in paths)
+            {
+                if (f.EndsWith(ext))
+                {
+                    try
+                    {
+                        li.Add(load<T>(f));
+                        filenames.Add(int.Parse(
+                            f.Substring(dir.Length+1, f.Length - dir.Length-1-ext.Length))
+                            );
                         Console.WriteLine($"loaded {typeof(T)} <{f}>");
                     }
                     catch (Exception e)
