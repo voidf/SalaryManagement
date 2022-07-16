@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.IO;
+using Utils;
 
 namespace DataModel
 {
@@ -82,7 +83,8 @@ namespace DataModel
         public static List<string> GetUserDirList()
         {
             var li = new List<string>();
-            foreach(var i in Directory.GetDirectories(Utils.Constant.user_path))
+            Constant.EnsurePath(Constant.user_path);
+            foreach (var i in Directory.GetDirectories(Utils.Constant.user_path))
             {
                 if(File.Exists($"{i}/{extension}"))
                 {
@@ -95,6 +97,7 @@ namespace DataModel
         public static List<string> GetUserDirListWithoutAuth()
         {
             var li = new List<string>();
+            Constant.EnsurePath(Constant.user_path);
             foreach (var i in Directory.GetDirectories(Utils.Constant.user_path))
             {
                 li.Add(i);

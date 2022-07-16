@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace SalaryManagement
 {
@@ -58,7 +59,7 @@ namespace SalaryManagement
 
             Utils.Protocol.dump<DataModel.Auth>(a, Utils.Constant.admin_auth_file);
 
-            MessageBox.Show("您的凭据已经保存成功，请谨记管理员用户名和密码\n如果忘记需要删除本程序目录下" + Utils.Constant.admin_auth_file+"并重新初始化本程序");
+            MessageBox.Show("您的凭据已经保存成功，请谨记管理员用户名和密码\n如果忘记需要删除本程序目录下" + Directory.GetCurrentDirectory() + '\\' + Utils.Constant.admin_auth_file+"并重新初始化本程序");
             mw.navigate(new LoginPage(mw));
         }
 
